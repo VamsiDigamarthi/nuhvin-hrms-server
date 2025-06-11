@@ -1,0 +1,26 @@
+{"level":"info","message":"SIGNUP API HIT","service":"auth-services","timestamp":"2025-06-10T16:14:54.451Z"}
+{"level":"error","message":"Signup Failed: sendResponse is not defined","service":"auth-services","timestamp":"2025-06-10T16:14:54.901Z"}
+{"level":"info","message":"SIGNUP API HIT","service":"auth-services","timestamp":"2025-06-10T16:15:09.184Z"}
+{"level":"info","message":"SIGNUP API HIT","service":"auth-services","timestamp":"2025-06-10T16:15:45.813Z"}
+{"level":"info","message":"SIGNUP API HIT","service":"auth-services","timestamp":"2025-06-10T16:16:29.635Z"}
+{"level":"info","message":"LOGIN API HIT","service":"auth-services","timestamp":"2025-06-10T16:16:37.677Z"}
+{"level":"info","message":"LOGIN API HIT","service":"auth-services","timestamp":"2025-06-10T16:17:54.970Z"}
+{"level":"info","message":"SIGNUP API HIT","service":"auth-services","timestamp":"2025-06-10T16:18:03.730Z"}
+{"level":"info","message":"LOGIN API HIT","service":"auth-services","timestamp":"2025-06-10T16:18:07.232Z"}
+{"level":"info","message":"LOGIN API HIT","service":"auth-services","timestamp":"2025-06-10T16:18:14.058Z"}
+{"level":"info","message":"LOGIN API HIT","service":"auth-services","timestamp":"2025-06-10T16:20:54.302Z"}
+{"level":"info","message":"LOGIN API HIT","service":"auth-services","timestamp":"2025-06-10T16:21:17.901Z"}
+{"level":"info","message":"LOGIN API HIT","service":"auth-services","timestamp":"2025-06-10T16:22:03.099Z"}
+{"level":"info","message":"LOGIN API HIT","service":"auth-services","timestamp":"2025-06-10T16:23:34.366Z"}
+{"level":"info","message":"LOGIN API HIT","service":"auth-services","timestamp":"2025-06-10T16:24:02.098Z"}
+{"level":"info","message":"LOGIN API HIT","service":"auth-services","timestamp":"2025-06-10T16:24:19.639Z"}
+{"level":"info","message":"LOGIN API HIT","service":"auth-services","timestamp":"2025-06-10T16:26:10.857Z"}
+{"level":"info","message":"LOGIN API HIT","service":"auth-services","timestamp":"2025-06-10T16:26:29.599Z"}
+{"level":"info","message":"LOGIN API HIT","service":"auth-services","timestamp":"2025-06-10T16:39:13.560Z"}
+{"level":"info","message":"LEAVSE API HIT","service":"auth-services","timestamp":"2025-06-11T05:22:46.070Z"}
+{"level":"info","message":"LEAVSE API HIT","service":"auth-services","timestamp":"2025-06-11T05:23:09.104Z"}
+{"level":"info","message":"LEAVSE API HIT","service":"auth-services","timestamp":"2025-06-11T05:24:31.753Z"}
+{"level":"info","message":"LEAVSE API HIT","service":"auth-services","timestamp":"2025-06-11T05:53:12.070Z"}
+{"level":"info","message":"LEAVSE API HIT","service":"auth-services","timestamp":"2025-06-11T07:32:21.515Z"}
+{"level":"info","message":"LEAVSE API HIT","service":"auth-services","timestamp":"2025-06-11T07:32:53.126Z"}
+{"level":"info","message":"LEAVSE API HIT","service":"auth-services","timestamp":"2025-06-11T08:26:36.879Z"}

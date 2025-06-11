@@ -1,0 +1,120 @@
+import LeavesModal from "../Modals/LeavesModal.js";
+import UserModal from "../Modals/UserModal.js";
+
+export const getLeaves = async (req, res) => {
+  const { page = 1, limit = 10, status, leaveType } = req.query;
+  const pageNumber = parseInt(page);
+  const limitNumber = parseInt(limit);
+
+  try {
+    const query = {};
+
+    if (status) {
+      query.status = status;
+    }
+
+    if (leaveType) {
+      query.leaveType = leaveType;
+    }
+
+    const leaves = await LeavesModal.find(query)
+      .sort({ createdAt: -1 })
+      .skip((pageNumber - 1) * limitNumber)
+      .limit(limitNumber)
+      .populate("user", "name email profilePic");
+
+    const total = await LeavesModal.countDocuments(query);
+
+    return res.status(200).json({
+      leaves,
+      totalPages: Math.ceil(total / limitNumber),
+      currentPage: pageNumber,
+    });
+  } catch (error) {
+    console.error("Error fetching leaves:", error);
+    res.status(500).json({ success: false, message: "Server Error" });
+  }
+};
+
+//   const { page = 1, limit = 10, search = "" } = req.query;
+//   const pageNumber = parseInt(page);
+//   const limitNumber = parseInt(limit);
+//   const searchQuery = search.trim().toLowerCase();
+
+//   try {
+//     // Build search query on relevant fields
+//     const query = searchQuery
+//       ? {
+//           $or: [
+//             { eventName: { $regex: searchQuery, $options: "i" } },
+//             { description: { $regex: searchQuery, $options: "i" } },
+//             { eventType: { $regex: searchQuery, $options: "i" } },
+//             { location: { $regex: searchQuery, $options: "i" } },
+//           ],
+//         }
+//       : {};
+
+//     // Count total matching documents
+//     const total = await EventModal.countDocuments(query);
+
+//     // Fetch
+
+export const updatedLeave = async (req, res) => {
+  const { id } = req.params;
+  const { status, hrNote } = req.body;
+
+  try {
+    await LeavesModal.findByIdAndUpdate(id, { status, hrNote }, { new: true });
+    return res.status(200).json({
+      message: "Leave status updated successfully",
+    });
+  } catch (error) {
+    console.error("Error updating leave status:", error);
+    return res.status(500).json({
+      message: "Server Error",
+    });
+  }
+};
+
+export const getEmployees = async (req, res) => {
+  const { page = 1, limit = 10, search, department, status } = req.query;
+  const pageNumber = parseInt(page);
+  const limitNumber = parseInt(limit);
+
+  console.log("search", search, "department", department, status, "status");
+
+  const query = {};
+  if (search) {
+    query.$or = [
+      { name: { $regex: search, $options: "i" } },
+      { empId: { $regex: search, $options: "i" } },
+    ];
+  }
+  if (department) {
+    query.department = department;
+  }
+  if (status) {
+    query.status = status;
+  }
+
+  console.log("query", query);
+
+  try {
+    const employees = await UserModal.find(query)
+      .skip((pageNumber - 1) * limitNumber)
+      .limit(limitNumber);
+
+    const total = await UserModal.countDocuments(query);
+
+    return res.status(200).json({
+      employees,
+      totalPages: Math.ceil(total / limitNumber),
+      currentPage: pageNumber,
+    });
+  } catch (error) {
+    console.error("Error get employees", error);
+    return res.status(500).json({
+      message: "Server Error",
+    });
+  }
+};
