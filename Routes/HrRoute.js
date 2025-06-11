@@ -6,6 +6,7 @@ import {
   getLeaves,
   updatedLeave,
 } from "../Controller/HrController.js";
+import { sendEmail } from "../Utils/sendMail.js";
 const router = express.Router();
 
 router.get("/leaves", authenticateToken, getLeaves);
