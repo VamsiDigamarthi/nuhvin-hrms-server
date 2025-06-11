@@ -1,5 +1,6 @@
 import LeavesModal from "../Modals/LeavesModal.js";
 import UserModal from "../Modals/UserModal.js";
+import { sendEmail } from "../Utils/sendMail.js";
 
 export const getLeaves = async (req, res) => {
   const { page = 1, limit = 10, status, leaveType } = req.query;
@@ -167,6 +168,21 @@ export const addNewEmployee = async (req, res) => {
     });
 
     await newEmployee.save();
+
+    try {
+      const url = `http://localhost:5173/signup/${empId}/${email}/${jobTitle}`;
+      sendEmail(
+        "Welcome Onboarding",
+        ` 
+         <h1>Welcome Onboarding</h1>
+          <p>Supraj will tell the mater later</p>
+          <a href=${url}>Setup Your Password</a>
+        `,
+        newEmployee.email
+      );
+    } catch (err) {
+      console.log("Error Sending Mail", err);
+    }
 
     return res.status(201).json({
       message: "Employee created successfully",
