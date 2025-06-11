@@ -118,3 +118,64 @@ export const getEmployees = async (req, res) => {
     });
   }
 };
+
+export const addNewEmployee = async (req, res) => {
+  try {
+    const {
+      name,
+      empId,
+      email,
+      mobile,
+      department,
+      jobTitle,
+      dob,
+      seatNumber,
+    } = req.body;
+
+    // Validate required fields manually if needed
+    if (
+      !name ||
+      !empId ||
+      !email ||
+      !mobile ||
+      !department ||
+      !jobTitle ||
+      !dob
+    ) {
+      return res
+        .status(400)
+        .json({ message: "All required fields must be filled" });
+    }
+
+    // Check if empId or email already exists
+    const existingEmp = await UserModal.findOne({
+      $or: [{ empId }, { email }],
+    });
+    if (existingEmp) {
+      return res
+        .status(409)
+        .json({ message: "Employee with same ID or Email already exists" });
+    }
+
+    // Create new employee
+    const newEmployee = new UserModal({
+      name,
+      empId,
+      email,
+      mobile,
+      department,
+      jobTitle,
+      dob,
+      seatNumber,
+    });
+
+    await newEmployee.save();
+
+    return res.status(201).json({
+      message: "Employee created successfully",
+    });
+  } catch (error) {
+    console.error("Add Employee Error:", error);
+    return res.status(500).json({ status: false, message: "Server error" });
+  }
+};

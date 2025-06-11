@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
   empId: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
+  password: { type: String, default: null },
   profilePic: { type: String, default: null },
   email: { type: String, default: null },
   mobile: { type: String, default: null },
@@ -35,7 +35,24 @@ const userSchema = new mongoose.Schema({
   insurance: { type: String, default: null },
   taxId: { type: String, default: null },
   socialInsurance: { type: String, default: null },
+
   joinDate: { type: String, default: null },
+
+  address: {
+    primaryAddress: { type: String, default: null },
+    country: { type: String, default: null },
+    state: { type: String, default: null },
+    city: { type: String, default: null },
+    postCode: { type: String, default: null },
+  },
+  emergencyContact: {
+    fullName: { type: String, default: null },
+    phoneNumber: { type: String, default: null },
+    email: { type: String, default: null },
+    gender: { type: String, default: null },
+    address: { type: String, default: null },
+  },
+
 });
 
 const UserModal = mongoose.model("User", userSchema);
