@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ["active", "inactive"],
+    enum: ["active", "inactive", "offboarding"],
     default: "active",
   },
   jobTitle: { type: String, default: null },
@@ -35,6 +35,7 @@ const userSchema = new mongoose.Schema({
   insurance: { type: String, default: null },
   taxId: { type: String, default: null },
   socialInsurance: { type: String, default: null },
+  joinDate: { type: String, default: null },
 });
 
 const UserModal = mongoose.model("User", userSchema);
