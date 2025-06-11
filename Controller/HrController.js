@@ -82,8 +82,6 @@ export const getEmployees = async (req, res) => {
   const pageNumber = parseInt(page);
   const limitNumber = parseInt(limit);
 
-  console.log("search", search, "department", department, status, "status");
-
   const query = {};
   if (search) {
     query.$or = [
@@ -98,10 +96,9 @@ export const getEmployees = async (req, res) => {
     query.status = status;
   }
 
-  console.log("query", query);
-
   try {
     const employees = await UserModal.find(query)
+      .sort({ createdAt: -1 })
       .skip((pageNumber - 1) * limitNumber)
       .limit(limitNumber);
 
@@ -193,5 +190,29 @@ export const addNewEmployee = async (req, res) => {
   } catch (error) {
     console.error("Add Employee Error:", error);
     return res.status(500).json({ status: false, message: "Server error" });
+  }
+};
+
+export const updateEmployeeProfile = async (req, res) => {
+  const { id } = req.params;
+  const updateFields = req.body;
+
+  try {
+    const updatedEmployee = await UserModal.findByIdAndUpdate(
+      id,
+      { $set: updateFields },
+      { new: true }
+    );
+
+    if (!updatedEmployee) {
+      return res.status(404).json({ message: "Employee not found" });
+    }
+
+    return res.status(200).json(updatedEmployee);
+  } catch (error) {
+    console.error("Error updating employee:", error);
+    return res
+      .status(500)
+      .json({ message: "Something went wrong", error: error.message });
   }
 };
